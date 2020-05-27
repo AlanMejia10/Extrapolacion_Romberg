@@ -44,6 +44,7 @@ int main() {
     float estimacionRomberg = ExtrapolacionRomberg(trapecioEstimaciones, 1, 4);
     printf("Estimacion de la integral por extrapolacion de Romberg: %.6f \n\n", estimacionRomberg);
 
+    std::cin.ignore();
     getchar();
 	return 0;
 }
@@ -100,5 +101,7 @@ float ExtrapolacionRomberg(std::vector<float>& estimacionExtrapolacion, int j, i
     std::cout<<std::endl;
 
     j++; grado += 2;
-    ExtrapolacionRomberg(extrapolacion, j, grado);
+    float estimacionRomberg = ExtrapolacionRomberg(extrapolacion, j, grado);
+
+    return estimacionRomberg;
 }

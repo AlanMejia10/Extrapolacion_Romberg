@@ -36,7 +36,7 @@ int main() {
 		trapecioEstimaciones.push_back(TrapecioSucesivo(pasoH, i, subintervalo, estimacionAnterior));
 	}
 
-    std::cout<<"\nEstimaciones con la regla del trapecio I(h)"<<std::endl;
+    std::cout<<"\nEstimaciones con la regla del trapecio sucesivo I(h)"<<std::endl;
 	for(int i = 0; i < trapecioEstimaciones.size(); i++)
 		printf("%.6f\n", trapecioEstimaciones.at(i));
 

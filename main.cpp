@@ -101,7 +101,5 @@ float ExtrapolacionRomberg(std::vector<float>& estimacionExtrapolacion, int j, i
     std::cout<<std::endl;
 
     j++; grado += 2;
-    float estimacionRomberg = ExtrapolacionRomberg(extrapolacion, j, grado);
-
-    return estimacionRomberg;
+    return ExtrapolacionRomberg(extrapolacion, j, grado);
 }

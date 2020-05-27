@@ -6,7 +6,7 @@ float TrapecioSucesivo(float pasoH, int iteracion, std::vector<float>& subinterv
 float EvaluacionFuncion(float a);
 std::vector<float> CalcularNuevosSubintervalos(std::vector<float>& valoresX);
 float CalcularSumaFunciones(const std::vector<float>& subintervalo);
-float ExtrapolacionRomberg(std::vector<float>& estimacionExtrapolacion, int j);
+float ExtrapolacionRomberg(std::vector<float>& estimacionExtrapolacion, int j, int grado);
 
 
 int main() {
@@ -36,14 +36,15 @@ int main() {
 		trapecioEstimaciones.push_back(TrapecioSucesivo(pasoH, i, subintervalo, estimacionAnterior));
 	}
 
-    std::cout<<"\nEstimaciones con la regla del trapecio"<<std::endl;
+    std::cout<<"\nEstimaciones con la regla del trapecio I(h)"<<std::endl;
 	for(int i = 0; i < trapecioEstimaciones.size(); i++)
 		printf("%.6f\n", trapecioEstimaciones.at(i));
 
     std::cout<<std::endl;
-    float estimacionRomberg = ExtrapolacionRomberg(trapecioEstimaciones, 1);
+    float estimacionRomberg = ExtrapolacionRomberg(trapecioEstimaciones, 1, 4);
     printf("Estimacion de la integral por extrapolacion de Romberg: %.6f \n\n", estimacionRomberg);
 
+    getchar();
 	return 0;
 }
 
@@ -84,13 +85,13 @@ float CalcularSumaFunciones(const std::vector<float>& subintervalo) {
 	return suma;
 }
 
-float ExtrapolacionRomberg(std::vector<float>& estimacionExtrapolacion, int j){
+float ExtrapolacionRomberg(std::vector<float>& estimacionExtrapolacion, int j, int grado){
     std::vector<float> extrapolacion;
 
     if(estimacionExtrapolacion.size() == 1)
         return estimacionExtrapolacion.at(0);
 
-    std::cout<<"Extrapolacion de Romberg"<<std::endl;
+    std::cout<<"Extrapolacion de Romberg O(h^"<<grado<<")"<<std::endl;
     for(int i=0; i<estimacionExtrapolacion.size() - 1; i++){
         extrapolacion.push_back(estimacionExtrapolacion.at(i+1) + (estimacionExtrapolacion.at(i+1) - estimacionExtrapolacion.at(i)) / (pow(4, j) - 1));
         printf("%.6f\n", extrapolacion.at(i));
@@ -98,6 +99,6 @@ float ExtrapolacionRomberg(std::vector<float>& estimacionExtrapolacion, int j){
 
     std::cout<<std::endl;
 
-    j++;
-    ExtrapolacionRomberg(extrapolacion, j);
+    j++; grado += 2;
+    ExtrapolacionRomberg(extrapolacion, j, grado);
 }
